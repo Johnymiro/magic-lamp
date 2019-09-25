@@ -2,18 +2,12 @@ package org.academiadecodigo.stringrays;
 
 public class MagicLamp {
 
-    private int maxNumOfCalls;
-    private int storeNum = maxNumOfCalls;
-
+    private int maxNumOfGenies;
+    private int reset = 0;
 
     public MagicLamp(int maxNumOfGenies){
-        this.maxNumOfCalls = maxNumOfGenies;
+        this.maxNumOfGenies = maxNumOfGenies;
     }
-
-
-
-
-
 
 
     public Genie enchant(){
@@ -21,9 +15,11 @@ public class MagicLamp {
 
         int random = rng();
 
-        if(maxNumOfCalls > 0) {
+        if(maxNumOfGenies > 0) {
 
-            maxNumOfCalls--;
+            maxNumOfGenies--;
+            reset++;
+
             if (random < 5) {
                 Genie friendlyGenie = new FriendlyGenie(3);
                 return friendlyGenie;
@@ -31,21 +27,22 @@ public class MagicLamp {
 
             Genie grumpyGenie = new GrumpyGenie(3);
             return grumpyGenie;
-
         }
 
+        if(maxNumOfGenies == 0){
+            System.out.println("Dude everything you've riched your limit.\n");
+        }
 
-        RecyclableDemon demon = new RecyclableDemon(3);
-
-        return demon;
+        RecyclableDemon demonGenie = new RecyclableDemon(3);
+        return demonGenie;
     }
 
 
-    public void recycle(RecyclableDemon demon){
+    public void recycle(Genie demon){
 
-        maxNumOfCalls = storeNum;
+        maxNumOfGenies = reset;
         demon.recycle();
-
+        System.out.println("Recycling successfull. You can call " + maxNumOfGenies + " more Genies!");
     }
 
 
@@ -53,15 +50,17 @@ public class MagicLamp {
 
     public int getMaxNumOfCalls(){
 
-        return maxNumOfCalls;
+        return maxNumOfGenies;
     }
 
+
+    public int getReset(){
+        return reset;
+    }
 
 
     private int rng(){
-
         return (int) Math.floor(Math.random() *  10);
     }
-
 }
 

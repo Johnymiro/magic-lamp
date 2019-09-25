@@ -35,4 +35,8 @@ public class Genie {
     public int getCurrentWish(){
         return this.currentWish;
     }
+
+    public void recycle(){
+
+    }
 }

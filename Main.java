@@ -4,31 +4,33 @@ public class Main {
 
     public static void main(String[] args) {
 
+        int num = 3;
+
+        MagicLamp lamp = new MagicLamp(3);
+
+        Genie[] genies = new Genie[4];
+
+        for(int i = 0; i < genies.length; i++){
+
+            genies[i] = lamp.enchant();
+        }
 
 
-        MagicLamp lamp1 = new MagicLamp(3);
+        printer(4, 0, genies);
+        printer(4,1, genies);
+        printer(4,2, genies);
+        printer(4,3, genies);
 
-        Genie genie1 = lamp1.enchant();
-        Genie genie2 = lamp1.enchant();
-        Genie genie3 = lamp1.enchant();
-        Genie genie4 = lamp1.enchant();
-
-
-
-        System.out.println(genie4.grantWish());
+        lamp.recycle(genies[genies.length - 1]);
 
 
+    }
 
+    private static void printer(int time, int index, Genie[] genie){
+        for(int i = 0; i < time; i++){
 
-
-
-
-
-
-
-
-
-
-
+            System.out.println(genie[index].grantWish());
+        }
+        System.out.println("\n\n");
     }
 }

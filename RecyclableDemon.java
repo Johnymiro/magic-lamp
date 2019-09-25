@@ -19,16 +19,17 @@ public class RecyclableDemon extends Genie{
         }
 
         return "Dude you just recycled me, Good bye...";
-
     }
 
+
+
+    @Override
     public void recycle(){
 
-        recycled = true;
-
-
+        this.recycled = true;
     }
 
-
-
+    public boolean isRecycled() {
+        return recycled;
+    }
 }
