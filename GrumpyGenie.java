@@ -2,24 +2,24 @@ package org.academiadecodigo.stringrays;
 
 public class GrumpyGenie extends Genie {
 
-    public GrumpyGenie(int maxNumOfWishes){
+    private boolean wish1Granted = false;
+
+
+    public GrumpyGenie(int maxNumOfWishes) {
         super(maxNumOfWishes);
     }
 
     @Override
-    public String grantWish(){
+    public String grantWish() {
 
-        while(super.getMaxNumWishes() > 1){
-            super.decrementMaxNumWishes();
+        if(wish1Granted){
+
+            return "Grumpy -> I choose not to grant any more wishes, you are ugly...";
         }
 
-        if(super.getMaxNumWishes() == 1){
+        wish1Granted = true;
+        super.decrementMaxNumWishes();
 
-            super.decrementMaxNumWishes();
-            return "Grumpy genie -> " + super.grantWish();
-        }
-
-        return "I choose not to grant any more wishes, you are ugly...";
-
+        return "Grumpy genie -> " + super.grantWish();
     }
 }

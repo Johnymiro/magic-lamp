@@ -2,7 +2,6 @@ package org.academiadecodigo.stringrays;
 
 public class RecyclableDemon extends Genie{
 
-    public String name = "Demon";
     private boolean recycled = false;
 
     public RecyclableDemon(int maxNumOfWishes){
@@ -19,16 +18,19 @@ public class RecyclableDemon extends Genie{
         }
 
         return "Dude you just recycled me, Good bye...";
-
     }
+
+
+
+
+
 
     public void recycle(){
 
-        recycled = true;
-
-
+        this.recycled = true;
     }
 
-
-
+    public boolean isRecycled() {
+        return recycled;
+    }
 }

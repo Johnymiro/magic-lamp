@@ -1,26 +1,23 @@
 package org.academiadecodigo.stringrays;
 
-public class FriendlyGenie extends Genie{
+public class FriendlyGenie extends Genie {
 
 
-
-
-    public FriendlyGenie(int maxNumWishes){
+    public FriendlyGenie(int maxNumWishes) {
         super(maxNumWishes);
 
     }
 
     @Override
-    public String grantWish(){
+    public String grantWish() {
 
-        if(super.getMaxNumWishes() > 0){
 
-            super.decrementMaxNumWishes();
+        if (super.getCurrentWish() >= getMaxNumWishes()) {
 
-            return "Friendly genie -> " +  super.grantWish();
+            return "No more wishes left.";
         }
 
-        return "No more wishes left";
-    }
 
+        return "Friendly genie -> " + super.grantWish();
+    }
 }

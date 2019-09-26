@@ -2,66 +2,87 @@ package org.academiadecodigo.stringrays;
 
 public class MagicLamp {
 
-    private int maxNumOfCalls;
-    private int storeNum = maxNumOfCalls;
+    private int remainingGenenies;
+    private int reset = 0;
+    private int recharged = 0;
 
 
-    public MagicLamp(int maxNumOfGenies){
-        this.maxNumOfCalls = maxNumOfGenies;
+    public MagicLamp(int maxNumOfGenies) {
+        this.remainingGenenies = maxNumOfGenies;
     }
 
 
 
+    public Genie rub() {
 
-
-
-
-    public Genie enchant(){
-
-
+        int numOfwishes = 3;
         int random = rng();
 
-        if(maxNumOfCalls > 0) {
+        if (remainingGenenies > 0) {
 
-            maxNumOfCalls--;
+            remainingGenenies--;
+            reset++;
+
             if (random < 5) {
-                Genie friendlyGenie = new FriendlyGenie(3);
-                return friendlyGenie;
+
+                return new FriendlyGenie ( numOfwishes );
             }
 
-            Genie grumpyGenie = new GrumpyGenie(3);
-            return grumpyGenie;
-
+            return new GrumpyGenie ( numOfwishes );
         }
 
+        if (remainingGenenies == 0) {
+            System.out.println("Dude everything you've riched your limit.\n");
+        }
 
-        RecyclableDemon demon = new RecyclableDemon(3);
-
-        return demon;
-    }
-
-
-    public void recycle(RecyclableDemon demon){
-
-        maxNumOfCalls = storeNum;
-        demon.recycle();
-
+        return new RecyclableDemon ( numOfwishes );
     }
 
 
 
 
-    public int getMaxNumOfCalls(){
 
-        return maxNumOfCalls;
+    public void recharge(Genie demon) {
+
+
+        if(!(demon instanceof RecyclableDemon)){
+            return;
+        }
+
+        RecyclableDemon dem = (RecyclableDemon) demon;
+
+        if(dem.isRecycled()){
+            System.out.println("You already recharged with this demon..");
+            return;
+        }
+
+        recharged++;
+        remainingGenenies = reset;
+        dem.recycle();
+        System.out.println("Recycling successfull. You can call " + remainingGenenies + " more Genies!");
     }
 
 
 
-    private int rng(){
+    public boolean compare(MagicLamp lamp) {
 
-        return (int) Math.floor(Math.random() *  10);
+        return this.remainingGenenies == lamp.remainingGenenies && this.reset == lamp.reset && this.recharged == lamp.recharged;
     }
 
+
+
+
+
+    private int rng() {
+        return (int) Math.floor(Math.random() * 10);
+    }
+
+    public int getMaxNumOfCalls() {
+
+        return remainingGenenies;
+    }
+    public int getReset() {
+        return reset;
+    }
 }
 
